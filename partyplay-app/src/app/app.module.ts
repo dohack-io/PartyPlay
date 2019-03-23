@@ -48,15 +48,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CurrentSongComponent } from './current-song/current-song.component';
+import { SongService } from './services/song.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    CurrentSongComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -99,7 +104,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [],
+  providers: [
+    HttpClient,
+    SongService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
