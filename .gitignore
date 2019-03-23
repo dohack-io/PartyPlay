@@ -1,2 +1,4 @@
 .idea/
-.idea/workspace.xml
+*.scssc
+Web/dist/css/style.min.css
+Web/dist/css/style.min.css.map
