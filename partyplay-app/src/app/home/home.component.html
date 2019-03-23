@@ -1,8 +1,17 @@
-<mat-card class="head-container">
-  <h1 class="head"> Welcome to the Party Play </h1>
-</mat-card>
-<mat-grid-list cols="1" rowHeight="80px">
-  <mat-grid-tile><button mat-raised-button class="join-button" color="primary">JOIN</button>
+<mat-grid-list cols="1" rowHeight="160px">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-form-field hintLabel="5 characters">
+        <input matInput #input maxlength="5" minlength="5" placeholder="Enter the ID" [formControl]="partyplayID"
+          required>
+        <mat-error *ngIf="partyplayID.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end">partyplay ID</mat-hint>
+      </mat-form-field>
+      <mat-card-actions class="join-action-container">
+        <button routerLink="../dashboard" mat-raised-button [disabled]="input.value >= 10000 ? false : true"
+          class="join-button" color="primary">JOIN</button>
+      </mat-card-actions>
+    </mat-card>
   </mat-grid-tile>
   <mat-grid-tile><button mat-raised-button class="connect-button" color="primary">CONNECT</button></mat-grid-tile>
 </mat-grid-list>
