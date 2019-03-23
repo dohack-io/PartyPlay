@@ -1,0 +1,15 @@
+/*
+
+    Images
+
+*/
+img,
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-height-fluid {
+  width: auto !important;
+  max-height: 100% !important;
+}

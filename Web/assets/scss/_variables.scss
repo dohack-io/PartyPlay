@@ -1,0 +1,57 @@
+/*
+
+    All variables are created in this file. A small preselection is already available
+
+*/
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//
+// Colors
+//
+$white: #ffffff;
+$black: #1A1A1A;
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//
+// Font families
+//
+$font-family-regular: 'Roboto';
+$font-family-bold: 'Roboto Bold';
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//
+// Font sizes
+//
+$f-small: 0.75rem; //12px
+$f-medium: 0.875rem; //14px
+$f-standard: 1rem; //16px
+$f-tall: 1.125rem; //18px
+$f-taller: 1.3125rem; //21px
+$f-big: 1.5rem; //24px
+$f-bigger: 2.25rem; //36px
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+//
+// Modified bootstrap grid system
+//
+
+// General Grid settings
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+$spacer: $grid-gutter-width;
+
+// Breakingpoints for Gridsystem
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+// Mobile Breaking Point
+$mobile: $lg;
+
+/*
+  Use media queries like this
+  @media (max-width: $md - 1) {}
+  @media (min-width: $md) {}
+*/

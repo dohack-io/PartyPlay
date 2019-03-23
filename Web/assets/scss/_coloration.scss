@@ -1,0 +1,30 @@
+/*
+
+    Use this file to set the basic color settings
+
+*/
+
+// Font
+//.f-green {
+//  color: $green;
+//}
+//
+//.f-blue {
+//  color: $blue;
+//}
+
+// Background
+.bgWhite {
+  background-color: $white;
+  color: $black;
+}
+
+.bgBlackTransparent {
+  background-color: rgba($black, 0.9);
+  color: $white;
+}
+
+// Shadow
+.box-shadow {
+  @include box-shadow();
+}

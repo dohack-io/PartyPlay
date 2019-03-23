@@ -1,0 +1,27 @@
+// Standard transition
+@mixin transition($prop: all,$duration: .25s, $easing: ease, $delay: 0s) {
+  -webkit-transition: $prop $duration $easing $delay;
+  -moz-transition: $prop $duration $easing $delay;
+  -o-transition: $prop $duration $easing $delay;
+  transition: $prop $duration $easing $delay;
+}
+
+// For icomoon.io
+@mixin icon() {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Standard box-shadow, can be improved by giving parameters
+@mixin box-shadow() {
+  -webkit-box-shadow: 0px 4px 4px 0px rgba($black,0.25);
+  -moz-box-shadow: 0px 4px 4px 0px rgba($black,0.25);
+  box-shadow: 0px 4px 4px 0px rgba($black,0.25);
+}

@@ -1,0 +1,26 @@
+/*
+
+    Here you can find general instructions for the website. Really only commands that don't style the website but commands that appear again and again, in every webproject
+
+*/
+
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar;
+  font-size: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: $font-family-regular;
+  color: $black;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

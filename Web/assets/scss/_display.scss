@@ -1,0 +1,37 @@
+/*
+
+    Display
+
+*/
+.d-flex {
+  display: -ms-flexbox!important;
+  display: flex!important;
+}
+
+.d-block {
+  display: block!important;
+}
+
+.d-inline-block {
+  display: inline-block!important;
+}
+
+.d-none,
+.hide {
+  display: none !important;
+}
+
+// Hide/Show on mobile classes
+@media (max-width: $mobile - 1) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  .show-on-mobile {
+    display: block !important;
+  }
+}
+@media (min-width: $mobile) {
+  .show-on-mobile {
+    display: none !important;
+  }
+}

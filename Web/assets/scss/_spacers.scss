@@ -1,0 +1,32 @@
+/*
+	Spacers
+*/
+
+//
+// This is a custom class to give container always same padding
+//
+.container-padding {
+  padding-top: $spacer;
+  padding-bottom: $spacer;
+}
+
+//
+// Creates p-a-full, p-x-half, p-y-0 and so on
+//
+$spaceSpacer: $spacer;
+$spaceSize: (full,half,'0');
+$spaceKind: (padding,margin);
+
+@each $size in $spaceSize {
+  @if $size == 'half' {$spaceSpacer: $spacer/2;}
+  @if $size == '0' {$spaceSpacer: 0;}
+  @each $kind in $spaceKind {
+    .#{str-slice($kind, 0, 1)}-a-#{$size} {#{$kind}: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-x-#{$size} {#{$kind}-left: #{$spaceSpacer} !important; #{$kind}-right: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-y-#{$size} {#{$kind}-top: #{$spaceSpacer} !important; #{$kind}-bottom: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-t-#{$size} {#{$kind}-top: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-b-#{$size} {#{$kind}-bottom: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-l-#{$size} {#{$kind}-left: #{$spaceSpacer} !important;}
+    .#{str-slice($kind, 0, 1)}-r-#{$size} {#{$kind}-right: #{$spaceSpacer} !important;}
+  }
+}

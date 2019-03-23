@@ -1,0 +1,115 @@
+/*
+
+    Takes control of fonts and icons
+
+*/
+
+// Include Icons
+@import '../../dist/css/icomoon/style.css';
+
+
+// Include Fonts
+@font-face {
+  font-family: $font-family-regular;
+  src: url(../fonts/Roboto/Roboto-Regular.ttf)format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: $font-family-bold;
+  src: url(../fonts/Roboto/Roboto-Bold.ttf)format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// Links
+a {
+  text-decoration: none;
+}
+
+
+// Headlines
+h1, .h1 {
+  font-family: $font-family-bold;
+  font-size: $f-bigger;
+  line-height: 1.2;
+  margin-bottom: $spacer;
+  font-weight: normal;
+}
+
+h2, .h2 {
+  font-family: $font-family-regular;
+  font-size: $f-big;
+  line-height: 1.2;
+  margin-bottom: $spacer/2;
+  font-weight: normal;
+}
+
+h3, .h3 {
+  font-family: $font-family-regular;
+  font-size: $f-taller;
+  line-height: 1.5;
+  margin-bottom: $spacer/2;
+  font-weight: normal;
+}
+
+h4, .h4 {
+  font-family: $font-family-bold;
+  font-size: $f-tall;
+  line-height: 1.5;
+  margin-bottom: $spacer/2;
+  font-weight: normal;
+}
+
+
+@media (max-width: $mobile - 1) {
+  h1, .h1 {
+    font-size: $f-big;
+  }
+
+  h2, .h2 {
+    font-size: $f-taller;
+  }
+
+  h3, .h3 {
+    font-size: $f-tall;
+  }
+}
+
+
+// Copytext
+p, .p {
+  font-size: $f-standard;
+  line-height: 1.5;
+  margin-bottom: $spacer/2;
+}
+[class^="col-"] p:last-child,
+[class*="col-"] p:last-child {
+  margin-bottom: 0;
+}
+
+
+// Utilities
+b,
+strong {
+  font-family: $font-family-bold;
+  font-weight: normal;
+}
+.italic {
+  font-style: italic;
+  // ... or if not so many font files an italic can be included as well... (remove font-style: italic;)
+  //font-family: $font-family-italic;
+  //font-weight: normal;
+
+}
+
+.text-align-left {
+  text-align: left;
+}
+.text-align-right {
+  text-align: right;
+}
+.text-align-center {
+  text-align: center;
+}

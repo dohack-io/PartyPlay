@@ -1,0 +1,11 @@
+{
+  "name": "arsors/blank-html-markup",
+  "description": "An HTML markup with the most important files to facilitate the entry into a project.",
+  "license": "GPL-3.0+",
+  "config": {
+    "vendor-dir": "assets/vendor"
+  },
+  "require": {
+    "twbs/bootstrap": "~4.2.1"
+  }
+}
