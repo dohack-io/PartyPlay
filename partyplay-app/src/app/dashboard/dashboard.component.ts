@@ -14,8 +14,15 @@ export class DashboardComponent implements OnInit {
   constructor(private songService: SongService) { }
 
   ngOnInit() {
-    this.playlistQueue = this.songService.playlistQueue;
+    this.udpatePlayListQueue();
   }
+
+  udpatePlayListQueue() {
+    this.songService.getPlayListQueue().subscribe((data: any[]) => {
+      this.playlistQueue = data;
+    });
+  }
+
 
   // TODO do request to know the current state of playlist queue on the server
 
