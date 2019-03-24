@@ -75,5 +75,5 @@
 
 
     // Send the user to the app!
-    header('location: app');
+    header('location: dashboard');
     die();
