@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import {
   MatButtonModule,
   MatCardModule,
@@ -111,6 +112,7 @@ import { SongComponent } from './song/song.component';
   providers: [
     HttpClient,
     SongService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

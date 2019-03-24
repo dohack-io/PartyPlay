@@ -3,20 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, interval, Observable, from, of } from 'rxjs';
 import { map, concatMap, tap, catchError } from 'rxjs/operators';
 import { songsResultSearch } from './songs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SongService {
 
-    private apiUrl = '';
-
     public playlistQueue: any[];
 
     public currentSong: BehaviorSubject<any> = new BehaviorSubject(null);
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient, private cookie: CookieService
     ) {
         this.playlistQueue = new Array<any>();
         // interval(5000).pipe(
@@ -27,20 +26,38 @@ export class SongService {
 
     addSongInTheQueue(song: any) {
         this.playlistQueue.push(song);
+        // this.http.post<any>
         // TODO add the song in the playlist queue of spotify account.
     }
 
+
+    checkIfLobbyExists(term: number) {
+        const apiUrl = 'API/lobbyExists.php';
+        return this.http.get<any>(`${apiUrl}?id=${term}`);
+    }
+
+    getPlayListQueue() {
+
+        const apiUrl = 'API/getTracks.php';
+        const id = this.cookie.get('lobby');
+        return this.http.get<any>(`${apiUrl}?id=${id}`);
+    }
+
+
     /* GET songs whose name contains search term */
     public searchSongs(term: string): Observable<any> {
+        const apiUrl = 'API/search.php';
+        const id = this.cookie.get('lobby');
+
         if (!term.trim()) {
             // if not search term, return empty hero array.
             return of([]);
         }
-        // return this.http.get<any[]>(`${this.apiUrl}/?name=${term}`).pipe(
-        //     tap(_ => console.warn(`found tracks matching "${term}"`)),
-        //     catchError(this.handleError<any[]>('searchTracks', []))
-        // );
-        return of(songsResultSearch);
+        return this.http.get<any>(`${apiUrl}?id=${id}&q=${term}`).pipe(
+            tap(_ => console.log(`found tracks matching "${term}"`)),
+            catchError(this.handleError<any[]>('searchTracks', []))
+        );
+        // return of(songsResultSearch);
     }
 
     /**

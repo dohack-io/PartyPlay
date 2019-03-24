@@ -8,10 +8,11 @@
         <mat-hint align="end">partyplay ID</mat-hint>
       </mat-form-field>
       <mat-card-actions class="join-action-container">
-        <button routerLink="../dashboard" mat-raised-button [disabled]="input.value >= 10000 ? false : true"
-          class="join-button" color="primary">JOIN</button>
+        <button (click)="navigateToDashboard(input.value)" mat-raised-button
+          [disabled]="input.value >= 10000 ? false : true" class="join-button" color="primary">JOIN</button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile><button mat-raised-button class="connect-button" color="primary">CONNECT</button></mat-grid-tile>
+  <mat-grid-tile><button href="API/auth.php" mat-raised-button class="connect-button" color="primary">CONNECT</button>
+  </mat-grid-tile>
 </mat-grid-list>
