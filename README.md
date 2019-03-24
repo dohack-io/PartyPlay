@@ -7,5 +7,5 @@ Check out the `API/conifg.example.php`
 
 Used Libarys:
 
-Spotify PHP Wrapper: https://github.com/jwilsson/spotify-web-api-php
-Angular
+- Spotify PHP Wrapper: https://github.com/jwilsson/spotify-web-api-php
+- Angular
