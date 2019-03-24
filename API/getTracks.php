@@ -18,7 +18,7 @@
         echo('Fail');
         die();
     }
-g
+
     //Get userID
     if ($userID = mysqli_fetch_array($conn->query('SELECT user_id FROM lobbys WHERE id = '.$lobbyID ))) {
 
