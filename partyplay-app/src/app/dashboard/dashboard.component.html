@@ -1,4 +1,20 @@
 <app-current-song></app-current-song>
-<p>
-  dashboard works!
-</p>
+
+<div id="dashboard">
+  <div class="search">
+    <app-song-search></app-song-search>
+  </div>
+
+  <div class="playlist-queue">
+    <h3>PlayList Queue</h3>
+    <hr />
+    <div *ngIf="(playlistQueue && playlistQueue.length > 0); else emptyInfo" class="">
+      <div *ngFor="let song of playlistQueue">
+        <app-song [song]="song" [state]="'queue'"> </app-song>
+      </div>
+    </div>
+    <ng-template #emptyInfo>
+      <p>The playlist queue is empty yet.</p>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div id="search-component">
+  <h2>Song Search</h2>
+
+  <mat-form-field class="search-song-field">
+    <input matInput type="text" #searchBox id="search-box" placeholder="enter a song" (input)="search(searchBox.value)">
+    <button mat-button *ngIf="searchBox.value" matSuffix mat-icon-button aria-label="Clear"
+      (click)="clearInput(searchBox)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div *ngIf="songs" class="search-result">
+    <div *ngFor="let song of songs; let i = index">
+      <app-song *ngIf="i < 3" [song]="song"> </app-song>
+    </div>
+  </div>
+</div>

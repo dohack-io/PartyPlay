@@ -1,21 +1,66 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, interval, Observable, from, of } from 'rxjs';
-import { map, concatMap, tap } from 'rxjs/operators';
-import { Song } from '../models/song.model';
+import { map, concatMap, tap, catchError } from 'rxjs/operators';
+import { songsResultSearch } from './songs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SongService {
 
-    public currentSong: BehaviorSubject<Song> = new BehaviorSubject(null);
+    private apiUrl = '';
+
+    public playlistQueue: any[];
+
+    public currentSong: BehaviorSubject<any> = new BehaviorSubject(null);
 
     constructor(
         private http: HttpClient
     ) {
+        this.playlistQueue = new Array<any>();
         // interval(5000).pipe(
         //     concatMap(() => this.http.get<Song>(`API ENDPUNKT`)),
         //     tap(x => this.currentSong.next(x))
         // ).subscribe();
+    }
+
+    addSongInTheQueue(song: any) {
+        this.playlistQueue.push(song);
+        // TODO add the song in the playlist queue of spotify account.
+    }
+
+    /* GET songs whose name contains search term */
+    public searchSongs(term: string): Observable<any> {
+        if (!term.trim()) {
+            // if not search term, return empty hero array.
+            return of([]);
+        }
+        // return this.http.get<any[]>(`${this.apiUrl}/?name=${term}`).pipe(
+        //     tap(_ => console.warn(`found tracks matching "${term}"`)),
+        //     catchError(this.handleError<any[]>('searchTracks', []))
+        // );
+        return of(songsResultSearch);
+    }
+
+    /**
+     * Handle Http operation that failed.
+     * Let the app continue.
+     * @param operation - name of the operation that failed
+     * @param result - optional value to return as the observable result
+     */
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+
+            // TODO: better job of transforming error for user consumption
+            console.error(`${operation} failed: ${error.message}`);
+
+            // Let the app keep running by returning an empty result.
+            return of(result as T);
+        };
     }
 
     public getCurrentSong(): Observable<any> {

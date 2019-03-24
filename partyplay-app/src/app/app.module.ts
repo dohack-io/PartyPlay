@@ -51,13 +51,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CurrentSongComponent } from './current-song/current-song.component';
 import { SongService } from './services/song.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SongSearchComponent } from './song-search/song-search.component';
+import { SongComponent } from './song/song.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    CurrentSongComponent
+    CurrentSongComponent,
+    SongSearchComponent,
+    SongComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,10 @@
-<div *ngIf="song" class="currentsong">
-  {{ song.item.name }}
+<div *ngIf="currentSong" class="current-currentSong">
+  <mat-card class="currentSong-card">
+    <mat-card-header class="currentSong-card-header">
+      <mat-card-title>{{ currentSong.name}}</mat-card-title>
+      <mat-card-subtitle>{{currentSong.artists[0].name}} | {{currentSong.album?.name}}</mat-card-subtitle>
+      <div mat-card-avatar [ngStyle]="{ 'background-image': 'url(' + currentSong.album?.images[0]?.url + ')'}"></div>
+      <img mat-card-avatar class="gif" src="../../assets/music-run.gif" alt="music run">
+    </mat-card-header>
+  </mat-card>
 </div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SongService } from '../services/song.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  playlistQueue: any[];
+
+  constructor(private songService: SongService) { }
 
   ngOnInit() {
+    this.playlistQueue = this.songService.playlistQueue;
   }
+
+  // TODO do request to know the current state of playlist queue on the server
 
 }

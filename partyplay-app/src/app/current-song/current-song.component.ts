@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SongService } from '../services/song.service';
 import { BehaviorSubject, interval } from 'rxjs';
-import { Song } from '../models/song.model';
 import { concatMap, map } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +10,7 @@ import { concatMap, map } from 'rxjs/operators';
 })
 export class CurrentSongComponent implements OnInit {
 
-  public song: Song;
+  public currentSong: any;
 
   constructor(
     private songService: SongService
@@ -19,13 +18,15 @@ export class CurrentSongComponent implements OnInit {
 
   ngOnInit() {
     this.songService.getCurrentSong().pipe(
-      map(x => this.song = x)
-    ).subscribe();
+      map(x => this.currentSong = x && x.item)
+    ).subscribe(() => {
+      console.log('first', this.currentSong);
+    });
     interval(5000).pipe(
       concatMap(() => this.songService.getCurrentSong()),
-      map(x => this.song = x)
-    ).subscribe();
-
+      map(x => this.currentSong = x && x.item)
+    ).subscribe(() => {
+      console.log(this.currentSong);
+    });
   }
-
 }
