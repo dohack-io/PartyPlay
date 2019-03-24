@@ -1,0 +1,91 @@
+<html>
+
+<head>
+    <title>Welcome to neonious one!</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript">
+
+
+        function toggle(type) {
+            // http://youmightnotneedjquery.com/ is a great resource on how to
+            // make web pages dynamic without jQuery or other additional libraries!
+            document.getElementById('err').style.display = 'none';
+
+            var isDone = false;
+            function done(ok) {
+                if (isDone)
+                    return;
+                isDone = true;
+
+                if (!ok)
+                    document.getElementById('err').style.display = '';
+            }
+
+            var request = new XMLHttpRequest();
+            request.open('GET', '/Toggle' + type, true);
+            request.onload = function () {
+                done(this.status >= 200 && this.status < 400);
+            };
+            request.onerror = function () {
+                done(false);
+            };
+            setTimeout(function () {
+                done(false);
+            }, 8000);
+            request.send();
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1 class='welcome'>Welcome to neonious one!</h1>
+        <p class='explain'>This page is served by a JavaScript example program preloaded on your neonious one.</p>
+        <p class='header'>Try out your board:</p>
+        <div class='buttons'>
+            <a href="javascript: toggle('Red')" class='button red'>Toggle Red LED</a>
+            <a href="javascript: toggle('Green')" class='button green'>Toggle Green LED</a>
+        </div>
+        <p id='err' style="display: none">AJAX request to toggle buttons failed!</p>
+        <p id='header'>Visit the IDE at
+            <a href="https://neonious.one:8443/" class='link'>https://neonious.one:8443/</a> to modify this program!</p>
+        <p class='header_small' id="header_small" style="display: none">If you are not running neonious one as access point and you did not make neonious.one point to its IP using /etc/hosts, you can still connect through <a href="#" id="ideLink"></a>. The certificate warning is correct in this case, but it is still secure.</p>
+        <p class='header'>External resources:</p>
+            <table class="external">
+            <tr>
+                <td valign="top">
+                    <a href="https://www.neonious.com/Documentation" target="_blank">https://www.neonious.com/Documentation</a>
+                </td>
+                <td valign="top">Be creative with this board! Get educated what you
+                    can do with this board here.
+                </td>
+            </tr>
+        </table>
+    </div>
+    <video id="video" muted autoplay>
+
+    <script type="text/javascript">
+        if (location.hostname && location.hostname != "neonious.one") {
+            document.getElementById('ideLink').href = 'https://' + location.hostname + ':8443/';
+            document.getElementById('ideLink').innerHTML = 'https://' + location.hostname + ':8443/';
+            document.getElementById('header_small').style.display = '';
+        } else
+            console.log("Cannot detect host name, maybe running from local?");
+    </script>
+
+     <script type="text/javascript">
+        var promise = document.querySelector('video').play();
+
+        if (promise !== undefined) {
+        promise.then(_ => {
+            // Autoplay started!
+        }).catch(error => {
+            // Autoplay was prevented.
+            // Show a "Play" button so that user can start playback.
+        });
+        }
+    </script>
+</body>
+
+</html>
