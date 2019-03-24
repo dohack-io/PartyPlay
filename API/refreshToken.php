@@ -8,14 +8,24 @@
 
 require 'config.php';
 
-    $lobbyID = $_GET['ID'];
+    //SQL Connection
+    $conn = new mysqli($db_servername, $db_username, $db_password, $db_name);
 
-    if ($refreshToken = $conn->query('SELECT refresh_token FROM lobbys WHERE ID = '.$lobbyID)) {
+    $lobbyID = $_GET['id'];
 
-        // Fetch the refresh token from somewhere. A database for example.
-        $session->refreshAccessToken($refreshToken);
+    // Fetch the refresh token
+    if ($refreshToken = mysqli_fetch_array($conn->query('SELECT refresh_token FROM lobbys WHERE ID = '.$lobbyID))) {
+
+        $session->refreshAccessToken($refreshToken[0]);
         $accessToken = $session->getAccessToken();
+        $refreshToken = $session->getRefreshToken();
 
         // Add new accessToken to db
-        $conn->query('');
+        if ($conn->query('UPDATE lobbys SET access_token="'. $accessToken.'",refresh_token="'. $refreshToken.'" WHERE user_id = ' . $userID)){
+            echo('true');
+        }else{
+            echo('false');
+        }
+    } else {
+        echo('Fetch Refresh Token failed. Please sign in again.');
     }

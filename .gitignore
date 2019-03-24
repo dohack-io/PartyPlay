@@ -2,3 +2,4 @@
 *.scssc
 Web/dist/css/style.min.css
 Web/dist/css/style.min.css.map
+API/config.php
