@@ -4,3 +4,8 @@ Let the crowd decide what music plays! Thanks to spotify's api we want to provid
 ## How to set it up:
 
 Check out the `API/conifg.example.php`
+
+Used Libarys:
+
+Spotify PHP Wrapper: https://github.com/jwilsson/spotify-web-api-php
+Angular
