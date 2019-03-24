@@ -26,19 +26,39 @@
     $accessToken = $session->getAccessToken();
     $refreshToken = $session->getRefreshToken();
 
+
+    $api->setAccessToken($accessToken);
+    $userID = $api->me()->id;
     //Write infos to db
-
-    if ($results = $conn->query('SELECT * FROM lobbys WHERE oauth = "' . $accessToken.'"')){
-        //User gibbet bereits
-
+    $hostHash = '';
+    if ($conn->query('SELECT * FROM lobbys WHERE user_id = "' . $userID.'"')->num_rows > 0){
+        //if the user exists then update the tokens
+        $conn->query('UPDATE lobbys SET access_token="'. $accessToken.'",refresh_token="'. $refreshToken.'" WHERE user_id = ' . $userID);
+        $hostHash = mysqli_fetch_array($conn->query('SELECT host_hash FROM lobbys WHERE user_id = ' . $userID));
     } else {
-
         //if the user don't exist in the db we will generate a new md5 hash for verification.
         $hostHash = md5(uniqid(rand(), true));
 
-        if($conn->query('INSERT INTO lobbys(host_hash, access_token, refresh_token) VALUES ("'.$hostHash.'","'.$accessToken.'","'.$refreshToken.'")') === false) {
+        if($conn->query('INSERT INTO lobbys(host_hash, access_token, refresh_token, user_id) VALUES ("'.$hostHash.'","'.$accessToken.'","'.$refreshToken.'","'.$userID.'")') === false) {
             die("Connection failed: " . $conn->connect_error);
         }
+    }
+
+    //get valid lobbyID from DB
+    $lobbyID = mysqli_fetch_array($conn->query('SELECT id FROM lobbys WHERE user_id = "' . $userID.'"'));
+
+    //create / check Playlist in the Spotify Account
+    $userPlaylists = $api->getUserPlaylists($userID, ['limit' => 50]);
+    $createPlaylist = true;
+    foreach ($userPlaylists->items as $playlist) {
+        if ($playlist->name === 'PartyPlay') {
+            $createPlaylist = false;
+        }
+    }
+    if($createPlaylist) {
+        $api->createPlaylist([
+            'name' => 'PartyPlay'
+        ]);
     }
 
     //set cookies for our Dashboard
@@ -47,16 +67,13 @@
     setcookie('host', '1', time() + (86400 * 30), "/");
 
     //host hash is a random md5 hash for validation
-    setcookie('hosthash', '1', time() + (86400 * 30), "/"); // 86400 = 1 day
+    setcookie('hosthash', $hostHash[0], time() + (86400 * 30), "/"); // 86400 = 1 day
 
     //set lobby ID as Cookie
-    setcookie('lobby', '1', time() + (86400 * 30), "/"); // 86400 = 1 day
-
-
-    // Store the access and refresh tokens somewhere. In a database for example.
+    setcookie('lobby', $lobbyID[0], time() + (86400 * 30), "/"); // 86400 = 1 day
 
 
 
-    // Send the user along and fetch some data!
-    header('Location: app.php');
+    // Send the user to the app!
+    header('location: app');
     die();
