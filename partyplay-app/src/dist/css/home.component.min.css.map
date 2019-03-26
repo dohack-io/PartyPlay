@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,4BAA8B,CAC1B,SAAS,CAAE,IAAI,CAGnB,sBAAuB,CACnB,OAAO,CAAE,eAAe,CACxB,eAAe,CAAE,iBAAiB",
-"sources": ["../../app/home/home.component.scss"],
-"names": [],
-"file": "home.component.min.css"
-}

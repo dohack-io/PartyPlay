@@ -1,0 +1,10 @@
+<div class="jumbotron text-center" ng-controller="searchController">
+	<h1>Suche</h1>
+	
+	<input ng-keyup="search(term)" ng-model="term" />
+	
+	<ul>
+  	  <li ng-repeat="item in items.tracks.items">{{item.name}}</li>
+	</ul>
+	
+</div>

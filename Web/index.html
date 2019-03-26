@@ -1,20 +1,122 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="partyplayApp">
 
 <head>
-  <meta charset="utf-8">
-  <title>PartyplayApp</title>
-  <base href="/">
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- SPELLS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.js"></script>
+  <base href="/app/">
+  <script>
+    
+	// create the module and name it partyplayApp
+	var partyplayApp = angular.module('partyplayApp', ['ngRoute']);
 
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	// configure our routes
+	partyplayApp.config(function($routeProvider, $locationProvider) {
+		$routeProvider
+
+			// route for the home page
+			.when('/', {
+				templateUrl : 'pages/home.html',
+				controller  : 'mainController'
+			})
+
+			// route for the home page
+			.when('/search', {
+				templateUrl : 'pages/search.html',
+				controller  : 'searchController'
+			});
+			
+			$locationProvider.html5Mode(true);
+    $scope.lobbyID = '10021';
+	// create the controller and inject Angular's $scope
+	partyplayApp.controller('mainController', function($scope, $http) {
+		// create a message to display in our view
+		$scope.message = 'Everyone come and see how good I look!';
+
+    //get current tracks
+    $scope.items = []
+    $scope.getItems = function() {
+      $http({
+         method: 'GET',
+         url: 'https://partyplay.camefrom.space/API/getTracks.php?id=' + $scope.lobbyID
+      })
+      .then(function successCallback(response) {
+          console.log("Succesfully connected to the API");
+          $scope.items = response.data;
+      }, function errorCallback(response) {
+          console.log("Error connecting to API");
+      }); 
+    }
+    //setInterval(function() {$scope.getItems()}, 5000);
+
+	});
+
+	// create the controller and inject Angular's $scope
+	partyplayApp.controller('searchController', function($scope, $http) {
+		// create a message to display in our view
+		$scope.message = 'This fucking search';
+
+        $scope.search = function(term) {
+          $scope.getItems(term);
+        }
+
+        //search for tracks
+        $scope.items = []
+        $scope.getItems = function(term) {
+          $http({
+             method: 'GET',
+             url: 'https://partyplay.camefrom.space/API/search.php?id='+ $scope.lobbyID +'&q='+term
+          })
+          .then(function successCallback(response) {
+              console.log("Succesfully connected to the API");
+              console.log(response.data.tracks.items);
+              $scope.items = response.data;
+          }, function errorCallback(response) {
+              console.log("Error connecting to API");
+          });
+        }
+
+	});
+    
+  </script>
 </head>
 
+<!-- define angular controller -->
 <body>
-  <app-root></app-root>
-<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="es2015-polyfills.js" nomodule></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Angular Routing Example</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/app"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="search"><i class="fa fa-shield"></i> Search</a></li>
+        <li><a href="contact"><i class="fa fa-comment"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+  
+    <!-- angular templating -->
+		<!-- this is where content will be injected -->
+    <div ng-view></div>
+    
+  </div>
+  
+</script>
+
+
+
+</body>
 
 </html>
