@@ -8,4 +8,7 @@ Check out the `API/conifg.example.php`
 Used Libarys:
 
 - Spotify PHP Wrapper: https://github.com/jwilsson/spotify-web-api-php
-- Angular
+- AngularJS
+
+### Origin of the idea
+We created this project at the DO!HackJS 2019 Hackathon. You can check out the special Branch if you want to see what we achieved in 24 Hours! https://github.com/dohack-io/PartyPlay/tree/DOHack-2019-Edition
